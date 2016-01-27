@@ -18,7 +18,7 @@ module RablRails
       end
 
       def instance_variable_data?
-        @instance_variable_data ||= data.to_s.start_with?('@')
+        @instance_variable_data ||= data.to_s.start_with?('@'.freeze)
       end
     end
   end
