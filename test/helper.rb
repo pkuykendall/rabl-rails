@@ -14,11 +14,7 @@ elsif RUBY_ENGINE == 'ruby'
   require 'libxml'
 end
 
-MINITEST_TEST_CLASS = if defined?(Minitest::Test)
-  Minitest::Test
-else
-  Minitest::Unit::TestCase
-end
+MINITEST_TEST_CLASS = Minitest::Test
 
 module Configurable
   def with_configuration(key, value)

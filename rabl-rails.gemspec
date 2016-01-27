@@ -11,11 +11,14 @@ Gem::Specification.new do |s|
   s.summary     = "Fast Rails 3+ templating system with JSON, XML and PList support"
   s.description = "Fast Rails 3+ templating system with JSON, XML and PList support"
 
+  s.required_ruby_version     = '>= 2.2.2'
+  s.required_rubygems_version = '>= 1.8.11'
+
   s.files         = `git ls-files`.split("\n")
   s.test_files    = `git ls-files -- test/*`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_dependency 'activesupport', '>= 3.1'
-  s.add_dependency 'railties', '>= 3.1'
+  s.add_dependency 'activesupport', '>= 4.2'
+  s.add_dependency 'railties', '>= 4.2'
   s.add_dependency 'thread_safe', '~> 0.3.1'
 end
