@@ -3,6 +3,7 @@
 ## 0.5.0 (Unreleased)
   * Add requirement ruby > 2.2.2
   * Drop support for Rails < 4.2
+  * Replace `thread_safe` with `concurrent_ruby`
 
 ## 0.4.2
   * Allow to pass locals to partials

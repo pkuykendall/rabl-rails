@@ -20,5 +20,5 @@ Gem::Specification.new do |s|
 
   s.add_dependency 'activesupport', '>= 4.2'
   s.add_dependency 'railties', '>= 4.2'
-  s.add_dependency 'thread_safe', '~> 0.3.1'
+  s.add_dependency 'concurrent-ruby', '~> 1.0.0'
 end
