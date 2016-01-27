@@ -11,7 +11,7 @@ Gem::Specification.new do |s|
   s.summary     = "Fast Rails 3+ templating system with JSON, XML and PList support"
   s.description = "Fast Rails 3+ templating system with JSON, XML and PList support"
 
-  s.required_ruby_version     = '>= 2.2.2'
+  s.required_ruby_version     = '>= 1.9.3'
   s.required_rubygems_version = '>= 1.8.11'
 
   s.files         = `git ls-files`.split("\n")
