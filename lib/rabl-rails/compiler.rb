@@ -155,7 +155,7 @@ module RablRails
       case name_or_data
       when Symbol
         str = name_or_data.to_s
-        str.start_with?('@'.freeze) ? [name_or_data, str[1..-1]] : [name_or_data, name_or_data]
+        str.start_with?('@') ? [name_or_data, str[1..-1]] : [name_or_data, name_or_data]
       when Hash
         name_or_data.first
       else
