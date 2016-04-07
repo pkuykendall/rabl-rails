@@ -1,6 +1,6 @@
 module RablRails
   class CompiledTemplate
-    attr_accessor :nodes, :data, :root_name, :cache_key
+    attr_accessor :nodes, :data, :root_name, :object_root, :cache_key
 
     def initialize
       @nodes = []

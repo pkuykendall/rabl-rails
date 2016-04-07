@@ -32,7 +32,7 @@ module Visitors
       object = object_from_data(_resource, n.data, n.instance_variable_data?)
 
       @_result[n.name] = if object
-        collection?(object) ? object.map { |o| sub_visit(o, n.nodes) } : sub_visit(object, n.nodes)
+        collection?(object) ? object.map { |o| sub_visit(o, n.nodes, n.object_root) } : sub_visit(object, n.nodes, n.object_root)
       else
         nil
       end
@@ -119,10 +119,13 @@ module Visitors
       }
     end
 
-    def sub_visit(resource, nodes)
+    def sub_visit(resource, nodes, object_root=nil)
       old_result, old_resource, @_result = @_result, @_resource, {}
       reset_for resource
       visit nodes
+      if object_root
+        @_result = { object_root.to_s => @_result}
+      end
       result
     ensure
       @_result, @_resource = old_result, old_resource

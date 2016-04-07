@@ -66,6 +66,13 @@ class TestCompiler < MINITEST_TEST_CLASS
         assert_equal :@user, t.data
         assert_equal :users, t.root_name
       end
+
+      it "can define object_root name via options" do
+        t = @compiler.compile_source(%{ collection :@user, :root => :users, :object_root => :user })
+        assert_equal :@user, t.data
+        assert_equal :users, t.root_name
+        assert_equal :user,  t.object_root
+      end
     end
 
     it "should not have a cache key if cache is not enable" do

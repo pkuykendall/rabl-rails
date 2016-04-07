@@ -26,12 +26,17 @@ module RablRails
     #
     def object(data, options = {})
       @template.data, @template.root_name = extract_data_and_name(data)
-      @template.root_name = options[:root] if options.has_key? :root
+      @template.root_name   = options[:root]        if options.has_key? :root
+      @template.object_root = options[:object_root] if options.has_key? :object_root
     end
     alias_method :collection, :object
 
     def root(name)
       @template.root_name = name
+    end
+
+    def object_root(name)
+      @template.object_root = name
     end
 
     #
@@ -42,17 +47,15 @@ module RablRails
     #
     def attribute(*args)
       node = Nodes::Attribute.new
+      attribute_hash = args.extract_options!
 
-      if args.first.is_a?(Hash)
-        args.first.each_pair { |k, v| node[v] = k }
-      else
-        options = args.extract_options!
-        args.each { |name|
-          key = options[:as] || name
-          node[key] = name
-        }
-        node.condition = options[:if]
-      end
+      args.each { |name|
+        key = attribute_hash[:as] || name
+        node[key] = name
+      }
+      attribute_hash.except(:if,:as).each_pair { |k, v| node[v] = k }
+
+      node.condition = attribute_hash[:if]
 
       @template.add_node node
     end
@@ -70,6 +73,7 @@ module RablRails
     def child(name_or_data, options = {})
       data, name = extract_data_and_name(name_or_data)
       name = options[:root] if options.has_key? :root
+      object_root = options[:object_root] if options.has_key? :object_root
 
       if options.key?(:partial)
         template = Library.instance.compile_template_from_path(options[:partial], @view)
@@ -78,7 +82,7 @@ module RablRails
         template = sub_compile(data) { yield }
       end
 
-      @template.add_node Nodes::Child.new(name, template)
+      @template.add_node Nodes::Child.new(name, template, object_root)
     end
 
     #

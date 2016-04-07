@@ -29,7 +29,7 @@ module RablRails
             render_resource(collection_or_resource, template.nodes, visitor)
           end
 
-          format_output(output_hash, root_name: template.root_name, params: context.params)
+          format_output(output_hash, root_name: template.root_name, object_root: template.object_root, params: context.params)
         end
       end
 

@@ -83,4 +83,19 @@ class TestRender < MINITEST_TEST_CLASS
     end
     assert_equal %q({"user":{"id":1,"name":"Marty"}}), RablRails.render(@user, 'show', view_path: @tmp_path)
   end
+
+  def test_object_root
+    @users = [@user]
+    File.open(@tmp_path + "index.rabl", "w") do |f|
+      f.puts %q{
+        collection :@users
+        root :current_users
+        object_root :user
+
+        attributes :id, :name
+      }
+    end
+    assert_equal %q({"current_users":[{"user":{"id":1,"name":"Marty"}}]}), RablRails.render(@users, 'index', view_path: @tmp_path)
+  end
+
 end
